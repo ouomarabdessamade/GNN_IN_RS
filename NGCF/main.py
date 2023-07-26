@@ -97,18 +97,3 @@ if __name__ == '__main__':
                 if epoch == 300 : 
                     torch.save(model.state_dict(), args.weights_path + str(epoch) + '.pkl')
                     print('save the weights in path: ', args.weights_path + str(epoch) + '.pkl')
-
-            recs = np.array(rec_loger)
-            pres = np.array(pre_loger)
-            ndcgs = np.array(ndcg_loger)
-            hit = np.array(hit_loger)
-
-            best_rec_0 = max(recs[:, 0])
-            idx = list(recs[:, 0]).index(best_rec_0)
-
-            final_perf = "Best Iter=[%d]@[%.1f]\trecall=[%s], precision=[%s], hit=[%s], ndcg=[%s]" % \
-                        (idx, time() - t0, '\t'.join(['%.5f' % r for r in recs[idx]]),
-                          '\t'.join(['%.5f' % r for r in pres[idx]]),
-                          '\t'.join(['%.5f' % r for r in hit[idx]]),
-                          '\t'.join(['%.5f' % r for r in ndcgs[idx]]))
-            print(final_perf)
